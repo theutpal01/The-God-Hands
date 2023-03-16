@@ -14,15 +14,33 @@
 
 ## GAMING GESTURES - KEYS -->
 #### NOTE: BOTH HANDS SHOULD BE OUT FOR RUNNER TYPE GAMES
-* TURN LEFT - OPEN LEFT HAND AND CLOSE RIGHT
-* TURN RIGHT - OPEN RIGHT HAND AND CLOSE LEFT
-* JUMP - SHOW THUMB OFF ANY HAND
-* DOWN - SHOW IINDEX FINGER OF ANY HAND
-* Action - SHOW RIGHT HAND'S INDEX AND MIDDLE FINGER
-* SPACEBAR - SHOW LEFT HAND'S INDEX AND MIDDLE FINGER
-
+* ArrowKey Left - Open left hand and close right
+* ArrowKey Right - Open right hand and close left
+* ArrowKey Up - Show thumb of both hands
+* ArrowKey Down - Show index finger of both hands
+* Action(e Key) - Show right hand's index and middle
+* Spacebar - Show right hand's index and middle
 
 
 
 ## KEYBOARD GESTURE -->
-* PENDING
+#### ONE HANDED GESTURES
+##### RIGHT HAND (BACK OF HAND FACING THE CAMERA)
+* Alt + F4 - 4 Fingers up
+* Win + D - Index finger up
+
+##### RIGHT HAND (PALM OF HAND FACING THE CAMERA)
+* Key Tab - Thumb up
+* Key Spacebar - Index finger up
+* Key Enter - 4 Fingers up
+
+##### LEFT HAND (PALM OF HAND FACING THE CAMERA)
+* Key Esc - 4 Fingers up
+* Screensoht shortcut - Starting 3 fingers up
+* Key Windows - Starting 2 fingers up
+
+#### TWO HANDED GESTURES
+* ArrowKey Left - Open left hand and close right
+* ArrowKey Right - Open right hand and close left
+* ArrowKey Up - Show thumb of both hands
+* ArrowKey Down - Show index finger of both hands

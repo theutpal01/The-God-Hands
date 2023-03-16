@@ -1,14 +1,13 @@
 from VideoGet import VideoGet
 from HandDetection import HandDetection
+from Gestures.Controller import Controller
 from Gestures.MouseGestures import MouseGestures
 from Gestures.KeyboardGestures import KeyboardGestures
 from Gestures.GamingGestures import GamingGestures
-import cv2
-import time, pyautogui
-import numpy as np
+import cv2, time, pyautogui
 
-FRAME_SIZE = (pyautogui.size()[0] - 400, pyautogui.size()[1] - 200)
-FRAME_MARGIN = (50, 200, 200, 200)
+FRAME_SIZE = (640, 420)
+FRAME_MARGIN = (30, 90, 170, 90)                # NESW FORMAT
 pyautogui.FAILSAFE = False
 
 def addTextOnScreen(frame, text, coordinates, color, font, font_scale, thickness):
@@ -16,20 +15,26 @@ def addTextOnScreen(frame, text, coordinates, color, font, font_scale, thickness
     return frame
 
 
-def threadVideoGet(src = 0):
-    video_gettr = VideoGet(FRAME_SIZE, src).start()
+def Viewer(src = 0):
+    video_gettr = VideoGet(FRAME_SIZE, src)
     detector = HandDetection(2)
     pTime = 0
     statusText = "Hello"
 
-    # GESTURES
-    mouseGest = MouseGestures(detector, 33, 11)
-    keyboardGest = KeyboardGestures(detector, 33)
-    gamingGest = GamingGestures(detector, 33)
+    # GESTURES INITIALIZED
+    control = Controller(detector)
+    control.setForMouse()
+    mouseGest = MouseGestures(detector, 23, 16)
+    keyboardGest = KeyboardGestures(detector, 23)
+    gamingGest = GamingGestures(detector, 23)
 
     while True:
+
+        # CAPTURING IMAGES
+        video_gettr.get()
+
         # PROGRAM QUIT CONDITIONS
-        if cv2.waitKey(1) == 27 or video_gettr.stopped:
+        if cv2.waitKey(1) == 27:
             break
 
         # GET FRAME AT EACH ITERATION
@@ -47,14 +52,18 @@ def threadVideoGet(src = 0):
         
 
         # MAIN TASKS
+        statusText = control.getStatus()
         hands, frame = detector.findHands(frame)
-        # frame = mouseGest.detectMovements(FRAME_SIZE, FRAME_MARGIN, frame, hands)
-        frame = keyboardGest.detectGestures(frame, hands, 50)
-        # frame = gamingGest.detectGestures(frame, hands)
+        frame = control.detectGesture(frame, hands)
+
+
+        if statusText == "Mouse": frame = mouseGest.detectMovements(FRAME_SIZE, FRAME_MARGIN, frame, hands)
+        elif statusText == "Keyboard": frame = keyboardGest.detectGestures(frame, hands)
+        elif statusText == "Gaming": frame = gamingGest.detectGestures(frame, hands)
         
 
         # SHOWING THE FRAME AND STATUS ON THE SCREEN
-        addTextOnScreen(frame, statusText, (5, FRAME_SIZE[1] - 10), (225, 0, 225,), cv2.FONT_HERSHEY_DUPLEX, 0.8, 1)
+        addTextOnScreen(frame, "Active: " + statusText + " Mode", (5, FRAME_SIZE[1] - 10), (180, 225, 10), cv2.FONT_HERSHEY_DUPLEX, 0.8, 1)
         video_gettr.showWin(frame)
         statusText = ""
 
@@ -64,9 +73,9 @@ def threadVideoGet(src = 0):
 
 
 def main():
-    threadVideoGet(0)
+    Viewer(0)
     
-    
+
 
 if __name__ == '__main__':
     main()

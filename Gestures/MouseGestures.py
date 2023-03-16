@@ -1,4 +1,4 @@
-import pyautogui, mouse
+import pyautogui
 from HandDetection import HandDetection
 import numpy as np
 import cv2
@@ -95,7 +95,7 @@ class MouseGestures:
                                 elif lmList[4][0] > lmList[9][0]:
                                     rightClickEnable = True
                         
-
+                        # USE OF ANY HAND WITH INDEX AND MIDDLE FINGER UP WITH SOME DIST B/W THEM AND THE OTHER IS SHOWED TO CAMERA FOR THE PROCESS TO START
                         if fingers[0] == 0 == fingers[4] and len(hands) == 2:
                             print("DRAGGING")
                             self.DRAG = True
@@ -104,33 +104,50 @@ class MouseGestures:
                                 self.CLICKED = True
                             pyautogui.moveTo(x, y)
 
+
+                        # USE OF ANY HAND WITH INDEX AND MIDDLE FINGER UP WITH SOME DIST B/W THEM
                         elif fingers[0] == 0 == fingers[4]:
-                            self.moveMouse(x, y, 0.05)
+                            print("HOVERING")
+                            self.moveMouse(x, y, 0.02)
                             self.CLICKED = False
 
+
+                        # USE OF ANY HAND WITH INDEX AND MIDDLE FINGER UP AND SEPARATED AND LAST FINGER SHOULD BE
                         elif fingers[0] == 0 and fingers[4] == 1 and not self.CLICKED:
+                            print("DOUBLE CLICK")
                             pyautogui.doubleClick(x, y)
                             self.CLICKED = True
                             self.DRAG = False
 
+
+                        # USE OF ANY HAND WITH INDEX AND MIDDLE FINGER SEPARATED AND UP AND THUMB SHOULD ALSO BE UP
                         elif fingers[0] == 1 and fingers[4] == 0 and rightClickEnable and not self.CLICKED:
+                            print("RIGHT CLICK")
                             pyautogui.rightClick(x, y)
                             self.CLICKED = True
                             self.DRAG = False
 
+                    
+                    # USE OF ANY HAND WITH INDEX AND MIDDLE FINGER UP AND JOINED TOGETHER
                     else:
                         cv2.circle(frame, info[-2:], 7, (200, 220, 0), cv2.FILLED)
                         if not self.CLICKED:
                             pyautogui.leftClick(x, y)
                             self.CLICKED = True
                             self.DRAG = False
-                            print("CLICKED")      
+                            print("LEFT CLICK")      
 
+
+                # USE OF ANY HAND WITH 4 FINGERS UP AND HAND SHOULD BE IN PALM TO CAMERA POSITION
                 elif 0 not in fingers[1:] and fingers[0] == 0:
+                        print("GOING UP")
                         pyautogui.scroll(self.trigger)
 
+
+            # USE OF ANY HAND WITH 4 FINGERS UP AND HAND SHOULD BE IN BACK TO CAMERA POSITION
             elif handInfo[0][:-1] == "Back" and handInfo[1][:-1] == "Up":
                 if 0 not in fingers[1:] and fingers[0] == 0:
+                    print("GOING DOWN")
                     pyautogui.scroll(-self.trigger)
 
         return frame

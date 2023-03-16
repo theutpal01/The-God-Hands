@@ -7,7 +7,6 @@ class GamingGestures:
         self.detector = detector
         self.trigger = trigger
         self.CLICKED = False
-        # self.HOLD = False
     
 
     def detectGestures(self, frame, hands):
@@ -26,28 +25,40 @@ class GamingGestures:
                     print("RESET")
                     self.CLICKED = False
 
+                # USE OF LEFT HAND 4 FINGERS
                 elif 1 not in fingersR and 0 not in fingersL and not self.CLICKED:
                     pyautogui.press("left")
+                    print("KEY LEFT")
                     self.CLICKED = True
                 
+                # USE OF RIGHT HAND 4 FINGERS
                 elif 1 not in fingersL and 0 not in fingersR and not self.CLICKED:
                     pyautogui.press("right")
+                    print("KEY RIGHT")
                     self.CLICKED = True
                 
-                elif ((1 not in fingersL[1:] and 1 not in fingersR and fingersL[0] == 1) or (1 not in fingersR[1:] and 1 not in fingersL and fingersR[0] == 1)) and not self.CLICKED:
+                # USE OF BOTH HAND THUMB
+                elif 1 not in fingersL[1:]  and 1 not in fingersR[1:] and fingersL[0] == 1 == fingersR[0] and not self.CLICKED:
                     pyautogui.press("down")
+                    print("KEY DOWN")
                     self.CLICKED = True
                 
-                elif ((1 not in fingersL[2:] and 1 not in fingersR and fingersL[0] == 0 and fingersL[1] == 1) or (1 not in fingersR[2:] and 1 not in fingersL and fingersR[0] == 0 and fingersR[1] == 1)) and not self.CLICKED:
+                # USE OF BOTH HAND INDEX FINGER
+                elif 1 not in fingersL[2:] and 1 not in fingersR[2:] and fingersL[0] == 0 == fingersR[0] and fingersL[1] == 1 == fingersR[1] and not self.CLICKED:
                     pyautogui.press("up")
+                    print("KEY UP")
                     self.CLICKED = True
                 
-                elif 1 not in fingersL[3:] and 1 not in fingersR and fingersL[0] == 0 and 0 not in fingersL[1:3] and not self.CLICKED:
+                # USE OF RIGHT HAND STARTING TWO FINGERS
+                elif 1 not in fingersL[3:] and 1 not in fingersR and 0 not in fingersL[1:3] and not self.CLICKED:
                     pyautogui.press("space")
+                    print("KEY SPACE")
                     self.CLICKED = True
                 
-                elif 1 not in fingersR[3:] and 1 not in fingersL and fingersR[0] == 0 and 0 not in fingersR[1:3] and not self.CLICKED:
+                # USE OF LEFT HAND STARTING TWO FINGERS
+                elif 1 not in fingersR[3:] and 1 not in fingersL and 0 not in fingersR[1:3] and not self.CLICKED:
                     pyautogui.press("e")
+                    print("KEY E(ACTION)")
                     self.CLICKED = True
 
         return frame
