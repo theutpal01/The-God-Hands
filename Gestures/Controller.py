@@ -21,7 +21,7 @@ class Controller:
 
             if handInfoL[0][:-1] == "Front" == handInfoR[0][:-1] and handInfoL[1][:-1] == "Up" == handInfoR[1][:-1]:
 
-                if 1 not in fingersL[2:4] and 1 not in fingersR[2:4] and fingersL[0] == 0 == fingersR[0] and fingersL[1] == fingersL[4] == 1 == fingersR[1] == fingersR[4]:
+                if 1 not in fingersL[2:] and 1 not in fingersR[2:] and fingersL[0] == fingersL[1] == 1 == fingersR[0] == fingersR[1]:
                     dist, lineInfo, frame = self.detector.findDistance(handL.get("center"), handR.get("center"), frame)
 
                     if dist < 150:
