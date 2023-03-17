@@ -6,7 +6,7 @@ from Gestures.KeyboardGestures import KeyboardGestures
 from Gestures.GamingGestures import GamingGestures
 import cv2, time, pyautogui
 
-WIN_NAME = "The Invisible Hands"
+WIN_NAME = "The God Hands (The Invisible Hands v2.O)"
 FRAME_SIZE = (700, 500)
 FRAME_MARGIN = (50, 110, 200, 110)                # NESW FORMAT
 pyautogui.FAILSAFE = False
