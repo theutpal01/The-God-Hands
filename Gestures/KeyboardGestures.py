@@ -71,7 +71,7 @@ class KeyboardGestures:
                     # ESC BTN GESRURE (TO CLICK ESC KEY) - USE OF LEFT HAND WITH 4 FINGERS UP
                     if 0 not in fingers[1:] and fingers[0] == 0 and not self.CLICKED:
                         pyautogui.keyDown("escape")
-                        pyautogui.keyDown("escape")
+                        pyautogui.keyUp("escape")
                         print("ESCAPE KEY")
                         self.CLICKED = True
                     
@@ -89,6 +89,34 @@ class KeyboardGestures:
                         pyautogui.keyUp("printscreen")
                         pyautogui.keyUp("win")
                         print("SCREENSHOT SHORTCUT")
+                        self.CLICKED = True
+
+                if handInfo[0][:-1] == "Back" and handInfo[1][:-1] == "Up":
+                    # CTRL + V GESRURE (TO USE PASTE SHORTCUT) - USE OF LEFT HAND WITH 4 FINGERS UP
+                    if 0 not in fingers[1:] and fingers[0] == 0 and not self.CLICKED:
+                        pyautogui.keyDown("ctrl")
+                        pyautogui.keyDown("v")
+                        pyautogui.keyUp("v")
+                        pyautogui.keyUp("ctrl")
+                        print("PASTE SHORTCUT")
+                        self.CLICKED = True
+
+                    # CTRL + C GESRURE (TO USE COPY SHORTCUT) - USE OF LEFT HAND WITH STARTING 2 FINGERS UP
+                    elif 1 not in fingers[3:] and fingers[0] == 0 and fingers[1] == 1 == fingers[2] and not self.CLICKED:
+                        pyautogui.keyDown("ctrl")
+                        pyautogui.keyDown("c")
+                        pyautogui.keyUp("c")
+                        pyautogui.keyUp("ctrl")
+                        print("COPY SHORTCUT")
+                        self.CLICKED = True
+
+                    # CTRL + X GESTURE (TO USE CUT SHROTCUT) - USE OF LEFT HAND WITH STARTING 3 FINGERS UP
+                    elif 0 not in fingers[1:4] and fingers[0] == 0 == fingers[4] and not self.CLICKED:
+                        pyautogui.keyDown("ctrl")
+                        pyautogui.keyDown("x")
+                        pyautogui.keyUp("x")
+                        pyautogui.keyUp("ctrl")
+                        print("CUT SHORTCUT")
                         self.CLICKED = True
 
 

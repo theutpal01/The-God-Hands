@@ -6,8 +6,9 @@ from Gestures.KeyboardGestures import KeyboardGestures
 from Gestures.GamingGestures import GamingGestures
 import cv2, time, pyautogui
 
-FRAME_SIZE = (640, 420)
-FRAME_MARGIN = (30, 90, 170, 90)                # NESW FORMAT
+WIN_NAME = "The Invisible Hands"
+FRAME_SIZE = (700, 500)
+FRAME_MARGIN = (50, 110, 200, 110)                # NESW FORMAT
 pyautogui.FAILSAFE = False
 
 def addTextOnScreen(frame, text, coordinates, color, font, font_scale, thickness):
@@ -24,7 +25,7 @@ def Viewer(src = 0):
     # GESTURES INITIALIZED
     control = Controller(detector)
     control.setForMouse()
-    mouseGest = MouseGestures(detector, 23, 16)
+    mouseGest = MouseGestures(detector, 30, 20)
     keyboardGest = KeyboardGestures(detector, 23)
     gamingGest = GamingGestures(detector, 23)
 

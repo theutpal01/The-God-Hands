@@ -39,9 +39,8 @@ class MouseGestures:
                 if 1 not in fingers[3:4] and 0 not in fingers[1:3]:
                     dist, info, frame = self.detector.findDistance(lmList[8][:2], lmList[12][:2], frame)
                     x, y = self.convertPoints(info[-2:], pyautogui.size(), frameSize, frameMargin)
-                    
-                    if dist >= self.trigger:
-                        
+
+                    if dist >= self.trigger:                        
                         # PERFECTING THUMB DETECTION
                         if handType == "Right":
                             
